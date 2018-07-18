@@ -1,0 +1,9 @@
+$color-big-box: #ff9999;
+$color-small-box: #ff6699;
+.grid {
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr minmax(200px, 1fr);
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr minmax(150px, 1fr);
+}
