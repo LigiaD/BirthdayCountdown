@@ -5,7 +5,7 @@ $color-small-box: #ff6699;
     width: 100vw;
     display: grid;
     grid-template-rows: 1fr 1fr 1fr 1fr minmax(200px, 1fr);
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr minmax(150px, 1fr);
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr minmax(350px, 1fr);
 
     &__title {
         grid-row: 1/2;
@@ -17,7 +17,7 @@ $color-small-box: #ff6699;
         color: white;
         font-weight: 300;
         line-height: 22px;
-        
+
         
         
         
