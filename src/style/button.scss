@@ -1,0 +1,22 @@
+.button {
+    position: relative;
+    justify-self: center;
+    border: none;
+    box-shadow: 0px 0px 30px 4px rgba(0, 0, 0, .6);
+    
+}
+.button {
+    grid-row: 4/5;
+    grid-column: 10/12;
+    justify-content: center;
+    height: 50px;
+    width: 350px;
+    background-color: $color-small-box;
+    clip-path: polygon(7% 0, 100% 0, 93% 100%, 0% 100%);
+    color: white;
+    font-family: 'Montserrat';
+    font-size: 18px;
+    line-height: 22px;
+    
+
+}
