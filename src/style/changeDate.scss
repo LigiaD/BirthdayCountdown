@@ -9,7 +9,10 @@
     background-color: transparent;
     border: none;
     transform: rotate(-67deg) translate(-30px, -30px);
-    font-family: 'Roboto Condensed';
+    font-family: $font-roboto;
+    &:focus {
+        outline: none;
+    }
     i {
         padding-right: 10px;
     }

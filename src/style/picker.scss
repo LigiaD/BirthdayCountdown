@@ -13,7 +13,7 @@ input{
     border-bottom: 2px solid #E3B924;
     border-block-end-width: 100px;
     font-size: 70px;
-    font-family: "Roboto Condensed";
+    font-family: $font-roboto;
     font-weight: bold;
     color: $color-gray-one;
     &:focus {

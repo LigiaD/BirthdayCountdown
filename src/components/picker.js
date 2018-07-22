@@ -17,7 +17,8 @@ handleChange(date) {
     this.setState({
         startDate: date
 
-        });
+    });
+    this.props.callback(date)
 }
 render() {
     return(
