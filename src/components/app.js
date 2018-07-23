@@ -10,68 +10,105 @@ import moment from 'moment';
 export default class App extends Component {
 
   constructor(props) {
-    super(props)
+    super(props);
+
+    this.timer = 0;
 
     this.state = {
       active: false,
-      startDate: moment()
+      startDate: moment(),
+      timeRemaining: {
+        days: 0,
+        hours: 0,
+        minutes: 0,
+        seconds: 0
+      },
+      age: 0
     }
+    this.handleGenerate = this.handleGenerate.bind(this)
   }
 
   handleChange = function(date) {
     console.log('APP JS HANDLE CHANGE',date._d);
+    clearInterval(this.timer);
     this.setState({
         startDate: date
      });
-}.bind(this)
+}.bind(this);
 
 
   handleGenerate = function() {
-    this.setState({ active: true})
+    
+    var bday = this.state.startDate.toDate();
+    var today = new Date();
+    var currentMonth = today.getMonth();
+    var birthMonth = bday.getMonth();
 
-    var CountdownDate = this.state.startDate.toDate().getTime();
-    var x = setInterval(function() {
+    var timeBetween = today.getTime() - bday.getTime();
+    var daysOld = Math.floor(timeBetween / (1000 * 60 * 60 * 24))
+    var age = Number((daysOld/365).toFixed(0));
+    this.setState({ 
+      age, 
+      active: true 
+    })
+    if(birthMonth > currentMonth) {
+      bday.setFullYear(today.getFullYear())
+    } else if(birthMonth < currentMonth) {
+      bday.setFullYear(today.getFullYear() +1)
+    } else if(birthMonth == currentMonth) {
+      var currentDay = today.getDate();
+      var birthDay = bday.getDate();
 
-    // Get todays date and time
-      var now = new Date().getTime();
-    // Find the distance between now and the countdown date
-      var distance = CountdownDate - now;
+      if(birthDay <= currentDay) {
+        bday.setFullYear(today.getFullYear() + 1)
+      }
+    }
+    var countDownDate = this.state.startDate.toDate().getTime();
+    this.timer = setInterval(function() {
 
-    // Time calculations for days, hours, minutes and seconds
+      var now = today.getTime();
+    
+      var distance = countDownDate - now;
+
       var days = Math.floor(distance / (1000 * 60 * 60 * 24));
       var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      var seconds = Map.floor((distance % (1000 * 60)) / 1000);
-
-    // Out the result in an element with id="demo"
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
       const time = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
-      console.log(time)
-
-      // If the countdown is over, write some text
+      
+        const timeRemaining = {
+          days,
+          hours,
+          minutes,
+          seconds
+        };
+        this.setState({ timeRemaining });
+  
       if (distance < 0) {
-          clearInterval(x);
+          clearInterval(this.timer);
           
       }
-    }, 1000);
-  }.bind(this)
+    }.bind(this),1000);
+  }.bind(this);
 
   renderItems = function () {
     if(this.state.active){
       return[
-        <Clock/>,
+        <Clock timeRemaining={this.state.timeRemaining}/>,
         ChangeDate('Change Date', () => this.setState({ active: false})),
         LargeText('03/04'),
-        <label className="grid__remaining">Remaining until your 19th birthday</label>
+        <label className="grid__remaining">Remaining until you turn {this.state.age}</label>
         
-      ]
+      ];
     } else {
       return[
-        <Picker callback={(date) => this.handleChange(date)}/>,
+        <Picker startDate={this.state.startDate} callback={(date) => this.handleChange(date)}/>,
        Button('Generate Countdown', () => this.setState({ active: true})) 
       ] 
     }
   }.bind(this)
+
   render() {
     
     return (
