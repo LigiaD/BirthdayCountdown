@@ -60,14 +60,18 @@ export default class App extends Component {
       var currentDay = today.getDate();
       var birthDay = bday.getDate();
 
+      if(birthDay > currentDay) {
+        bday.setFullYear(today.getFullYear())
+      }
       if(birthDay <= currentDay) {
         bday.setFullYear(today.getFullYear() + 1)
       }
     }
-    var countDownDate = this.state.startDate.toDate().getTime();
+
+    var countDownDate = bday.getTime();
     this.timer = setInterval(function() {
 
-      var now = today.getTime();
+      var now = moment().toDate().getTime();
     
       var distance = countDownDate - now;
 
@@ -108,7 +112,7 @@ export default class App extends Component {
         <Clock key={0} timeRemaining={this.state.timeRemaining}/>,
         ChangeDate('Change Date', () => this.setState({ active: false})),
         LargeText(this.getBirthDate(this.state.startDate.toDate())),
-        <label key={3} className="grid__remaining">Remaining until you turn {this.state.age}</label>
+        <label key={3} className="grid__remaining">Remaining until you turn {this.state.age}:</label>
         
       ];
     } else {
@@ -120,7 +124,6 @@ export default class App extends Component {
       />,
        Button('Generate Countdown', () => this.handleGenerate()) 
       ]; 
-
     }
   }.bind(this);
 

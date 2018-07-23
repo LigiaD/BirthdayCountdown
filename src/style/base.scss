@@ -10,7 +10,7 @@ $font-roboto: "Roboto Condensed";
     width: 100vw;
     display: grid;
     grid-template-rows: 1fr 1fr 1fr 1fr minmax(200px, 1fr);
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr minmax(350px, 1fr);
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr minmax(100px, 1fr);
 
     &__title {
         grid-row: 1/2;
@@ -23,15 +23,16 @@ $font-roboto: "Roboto Condensed";
         font-weight: 300;
         line-height: 22px;
 
+    }
     &__remaining {
         grid-row: 4/5;
         grid-column: 6/10;
+        align-self: end;
+        font-family: 'Montserrat';
+        font-size: 18px;
+        font-weight: 400;
+        margin-bottom: 20px;
 
-    }
-
-        
-        
-        
 
     }
 }
